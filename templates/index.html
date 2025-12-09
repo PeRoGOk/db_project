@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-3">Products</h2>
+
+<form class="mb-4" method="post" action="/add">
+    <input class="form-control mb-2" type="text" name="name" placeholder="Name" required>
+    <input class="form-control mb-2" type="number" step="0.01" name="price" placeholder="Price" required>
+    <textarea class="form-control mb-2" name="description" placeholder="Description"></textarea>
+    <button class="btn btn-primary">Add</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr><th>ID</th><th>Name</th><th>Price</th><th>Description</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.price }}</td>
+            <td>{{ p.description }}</td>
+            <td>
+                <a class="btn btn-warning btn-sm" href="/edit/{{ p.id }}">Edit</a>
+                <a class="btn btn-danger btn-sm" href="/delete/{{ p.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
